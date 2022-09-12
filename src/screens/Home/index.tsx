@@ -10,6 +10,8 @@ import {
   HeaderContent
 } from './styles';
 
+import { Car } from '../../components/Car'
+
 export function Home() {
   return (
     <Container>
@@ -29,6 +31,8 @@ export function Home() {
           </TotalCars>
         </HeaderContent>
       </Header>
+
+      <Car />
     </Container>
   );
 };
