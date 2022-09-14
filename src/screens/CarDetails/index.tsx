@@ -12,6 +12,7 @@ import {
     Rent,
     Period,
     Price,
+    About
 } from './styles';
 
 import { BackButton } from '../../components/BackButton';
@@ -41,6 +42,9 @@ export function CarDetails() {
                     </Rent>
                 </Details>
 
+                <About>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam velit voluptate voluptatem totam animi fugit dicta, mollitia labore voluptas magni nostrum autem quae delectus ipsam illum veritatis. Velit, deleniti officia!
+                </About>
             </Content>
         </Container>
     );
