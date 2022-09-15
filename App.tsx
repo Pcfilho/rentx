@@ -15,6 +15,7 @@ import {
 
 import { CarDetails } from './src/screens/CarDetails';
 import theme from './src/styles/theme';
+import { Home } from './src/screens/Home';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
