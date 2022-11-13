@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import { FlatList } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+import { CarModel } from "../../models/CarModel";
 
 
 export const Container = styled.View`
@@ -38,5 +39,4 @@ export const CarList = styled(FlatList).attrs({
     padding: 24,
   },
   showVerticalScrollIndicator: false
-})`
-`;
+})`` as React.ComponentType as new <DataListProps>() => FlatList<DataListProps>;

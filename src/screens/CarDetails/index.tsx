@@ -29,18 +29,19 @@ import exchangeSvg from '../../assets/exchange.svg';
 import peopleSvg from '../../assets/people.svg';
 import { Button } from '../../components/Button';
 import { useNavigation } from '@react-navigation/native';
+import { useNavigate } from '../../hooks/navigate';
 
 export function CarDetails() {
-    const navigation = useNavigation();
+    const { goTo, goBack } = useNavigate();
 
     function handleConfirmRental() {
-        navigation.navigate('Scheduling');
+        goTo('Scheduling');
     }
 
     return (
         <Container>
             <Header>
-                <BackButton onPress={() => navigation.goBack()}/>
+                <BackButton onPress={goBack}/>
             </Header>
 
             <CarImages>

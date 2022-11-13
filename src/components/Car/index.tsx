@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { RectButtonProps } from 'react-native-gesture-handler';
 
 import GasolineSvg from '../../assets/gasoline.svg';
+import { CarModel } from '../../models/CarModel';
 
 import {
     Container,
@@ -16,20 +17,9 @@ import {
     CarImage,
 } from './styles';
 
-interface CarData {
-    brand: string;
-    name: string;
-    rent: {
-        period: string;
-        price: number;
-    },
-    thumbnail: string;
-}
 interface Props extends PropsWithChildren<RectButtonProps> {
-    data: CarData;
+    data: CarModel;
 }
-
-
 
 export function Car({ data, ...rest } : Props ) {
     return (

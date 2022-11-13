@@ -9,7 +9,13 @@ export function useNavigate() {
     index: 0,
     routes: [{ name: 'Home'}]
   });
+  const goBack = () => {
+    if (navigation.canGoBack) {
+      navigation.goBack();
+    } else {
+      console.log("'Can't go back!!'");
+    }
+  };
 
-
-  return { goTo, clearNavigation };
+  return { goTo, clearNavigation, goBack };
 }

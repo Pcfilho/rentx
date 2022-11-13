@@ -19,14 +19,14 @@ import {
     Content,
     Footer,
 } from './styles';
-import { useNavigation } from "@react-navigation/native";
+import { useNavigate } from "../../hooks/navigate";
 
 export function Scheduling() {
     const theme = useTheme();
-    const navigation = useNavigation();
+    const { goTo, goBack } = useNavigate();
 
     function handleConfirmRental() {
-        navigation.navigate('SchedulingDetails');
+        goTo('SchedulingDetails');
     }
 
     return(
@@ -38,7 +38,7 @@ export function Scheduling() {
                     backgroundColor="transparent"
                 />
 
-                <BackButton  color={theme.colors.shape} onPress={() => navigation.goBack()}/>
+                <BackButton  color={theme.colors.shape} onPress={goBack}/>
 
                 <Title>
                     Escolha uma {'\n'}

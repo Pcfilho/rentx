@@ -47,7 +47,7 @@ import { useNavigate } from '../../hooks/navigate';
 export function SchedulingDetails() {
     const theme = useTheme();
     const navigation = useNavigation();
-    const { goTo } = useNavigate('SchedulingComplete');
+    const { goTo } = useNavigate();
     
     return (
         <Container>
