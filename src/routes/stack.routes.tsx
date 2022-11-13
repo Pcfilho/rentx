@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { routesNames } from './routesEnum';
 
 import { Home } from '../screens/Home';
 import { CarDetails } from '../screens/CarDetails';
@@ -10,36 +11,40 @@ import { SchedulingComplete } from '../screens/SchedulingComplete';
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export function StackRoutes() {
+    const {
+        HOME,
+        CAR_DETAILS,
+        SCHEDULING,
+        SCHEDULING_COMPLETE,
+        SCHEDULING_DETAILS
+    } = routesNames;
+
     return(
         <Navigator screenOptions={{
             headerShown: false,
         }}>
-
             <Screen 
-                name="Home"
+                name={HOME}
                 component={Home}
             />
-
             
             <Screen 
-                name="CarDetails"
+                name={CAR_DETAILS}
                 component={CarDetails}
             />            
             
-            
-            
             <Screen 
-                name="Scheduling"
+                name={SCHEDULING}
                 component={Scheduling}
             />            
         
             <Screen 
-                name="SchedulingDetails"
+                name={SCHEDULING_DETAILS}
                 component={SchedulingDetails}
             />                
     
             <Screen 
-                name="SchedulingComplete"
+                name={SCHEDULING_COMPLETE}
                 component={SchedulingComplete}
             />
         </Navigator>

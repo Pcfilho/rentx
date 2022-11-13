@@ -43,6 +43,7 @@ import exchangeSvg from '../../assets/exchange.svg';
 import peopleSvg from '../../assets/people.svg';
 import { useNavigation } from '@react-navigation/native';
 import { useNavigate } from '../../hooks/navigate';
+import { routesNames } from '../../routes/routesEnum';
 
 export function SchedulingDetails() {
     const theme = useTheme();
@@ -124,7 +125,7 @@ export function SchedulingDetails() {
             </Content>  
 
             <Footer>
-                <Button title="Alugar agora" color={theme.colors.success} onPress={() => goTo('SchedulingComplete')}/>
+                <Button title="Alugar agora" color={theme.colors.success} onPress={() => goTo(routesNames.SCHEDULING_COMPLETE)}/>
             </Footer>
         </Container>
     );

@@ -20,13 +20,14 @@ import {
     Footer,
 } from './styles';
 import { useNavigate } from "../../hooks/navigate";
+import { routesNames } from "../../routes/routesEnum";
 
 export function Scheduling() {
     const theme = useTheme();
     const { goTo, goBack } = useNavigate();
 
     function handleConfirmRental() {
-        goTo('SchedulingDetails');
+        goTo(routesNames.SCHEDULING_DETAILS);
     }
 
     return(
