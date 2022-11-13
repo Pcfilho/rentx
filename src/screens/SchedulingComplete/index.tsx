@@ -12,9 +12,12 @@ import {
     Message,
     Footer,
 } from './styles';
+import { useNavigate } from "../../hooks/navigate";
 
 export function SchedulingComplete() {
     const { width } = useWindowDimensions();
+    const { clearNavigation } = useNavigate();
+
     return(
         <Container>
             <StatusBar 
@@ -35,7 +38,7 @@ export function SchedulingComplete() {
             </Content>
 
             <Footer>
-                <ConfirmButton title={'OK'}/>
+                <ConfirmButton title={'OK'} onPress={clearNavigation}/>
             </Footer>
         </Container>
     );

@@ -41,13 +41,18 @@ import forceSvg from '../../assets/force.svg';
 import gasolineSvg from '../../assets/gasoline.svg';
 import exchangeSvg from '../../assets/exchange.svg';
 import peopleSvg from '../../assets/people.svg';
+import { useNavigation } from '@react-navigation/native';
+import { useNavigate } from '../../hooks/navigate';
 
 export function SchedulingDetails() {
     const theme = useTheme();
+    const navigation = useNavigation();
+    const { goTo } = useNavigate('SchedulingComplete');
+    
     return (
         <Container>
             <Header>
-                <BackButton onPress={() => {}}/>
+                <BackButton onPress={() => navigation.goBack()}/>
             </Header>
 
             <CarImages>
@@ -119,7 +124,7 @@ export function SchedulingDetails() {
             </Content>  
 
             <Footer>
-                <Button title="Confirmar"/>
+                <Button title="Alugar agora" color={theme.colors.success} onPress={() => goTo('SchedulingComplete')}/>
             </Footer>
         </Container>
     );
