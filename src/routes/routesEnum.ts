@@ -5,4 +5,5 @@ export const routesNames = {
   SCHEDULING_DETAILS: 'SchedulingDetails',
   SCHEDULING_COMPLETE: 'SchedulingComplete',
   MY_CARS: 'MyCars',
+  SPLASH: 'Splash'
 };
