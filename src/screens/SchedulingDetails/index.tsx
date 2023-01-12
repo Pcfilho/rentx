@@ -57,6 +57,7 @@ interface RentalPeriod {
 
 
 export function SchedulingDetails() {
+    const [loading, setLoading] = useState(false);
     const theme = useTheme();
     const { goTo, goBack } = useNavigate();
     const { car, dates } = useRouteParams<Params>();
@@ -69,10 +70,14 @@ export function SchedulingDetails() {
             unavailable_dates
         })
         .then(() => goTo(routesNames.SCHEDULING_COMPLETE))
-        .catch(() => Alert.alert('Não foi possível realizar o aluguel'))   
+        .catch(() =>{
+            Alert.alert('Não foi possível realizar o aluguel')
+            setLoading(false);
+        })   
     }
 
     const handleConfirmRental = async () => {
+        setLoading(true);
         await api.post('schedules_byuser', {
             user_id: 1,
             car,
@@ -176,7 +181,13 @@ export function SchedulingDetails() {
             </Content>  
 
             <Footer>
-                <Button title="Alugar agora" color={theme.colors.success} onPress={() => handleConfirmRental()}/>
+                <Button 
+                    title="Alugar agora" 
+                    color={theme.colors.success} 
+                    onPress={() => handleConfirmRental()}
+                    enabled={!loading}
+                    loading={loading}
+                />
             </Footer>
         </Container>
     );
