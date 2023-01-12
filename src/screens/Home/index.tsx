@@ -32,7 +32,6 @@ export function Home() {
 
   useEffect(() => {
       api.get('/cars').then(({ data }) => {
-        console.log(data);
         setCars(data);
       })
   }, []);
