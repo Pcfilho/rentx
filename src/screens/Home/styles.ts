@@ -41,15 +41,3 @@ export const CarList = styled(FlatList).attrs({
   },
   showVerticalScrollIndicator: false
 })`` as React.ComponentType as new <DataListProps>() => FlatList<DataListProps>;
-
-export const MyCarButton = styled(RectButton)`
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.colors.main};
-  position: absolute;
-  bottom: 2%;
-  right: 5%;
-`;
