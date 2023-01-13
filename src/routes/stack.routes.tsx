@@ -37,6 +37,9 @@ export function StackRoutes() {
             <Screen 
                 name={HOME}
                 component={Home}
+                options={{
+                    gestureEnabled: false,
+                }}
             />
             
             <Screen 

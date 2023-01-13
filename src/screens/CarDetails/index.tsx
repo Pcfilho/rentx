@@ -30,7 +30,6 @@ import { StatusBar, StyleSheet } from 'react-native';
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 import { Button } from '../../components/Button';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { RFValue } from 'react-native-responsive-fontsize';
 import theme from '../../styles/theme';
 
 interface Params {

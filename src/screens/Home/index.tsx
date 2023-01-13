@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar, StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet, BackHandler, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Logo from '../../assets/logo.svg';
@@ -9,6 +9,9 @@ import { api } from '../../services/api';
 import { CarModel } from '../../models/CarModel';
 import { routesNames } from '../../routes/routesEnum';
 import { Load } from '../../components/Load';
+
+import { LoadAnimation } from '../../components/LoadAnimation';
+
 import { useTheme } from 'styled-components';
 
 import {
@@ -31,6 +34,7 @@ import { RectButton, PanGestureHandler } from 'react-native-gesture-handler';
 const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
 
 export function Home() {
+  const [loading, setLoading] = useState(true);
   const { goToWithCar, goWithParams } = useNavigate();
   const [cars, setCars] = useState<CarModel[]>([]);
   const theme = useTheme()
@@ -70,7 +74,13 @@ export function Home() {
   useEffect(() => {
       api.get('/cars').then(({ data }) => {
         setCars(data);
-      })
+      }).finally(() => setLoading(false))
+  }, []);
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      return true;
+    })
   }, []);
 
   return (
@@ -86,9 +96,12 @@ export function Home() {
             width={RFValue(108)}
             height={RFValue(12)}
           />
-          <TotalCars>
-            Total de {cars.length} carros
-          </TotalCars>
+          {
+            !loading &&
+              <TotalCars>
+                Total de {cars.length} carros
+              </TotalCars>
+          }
         </HeaderContent>
       </Header>
       
@@ -98,7 +111,7 @@ export function Home() {
         renderItem={({ item }) => <Car data={item} onPress={() => {
           goToWithCar(routesNames.CAR_DETAILS, item);
         }} />}
-        ListEmptyComponent={<Load />}
+        ListEmptyComponent={<LoadAnimation />}
       />
       <PanGestureHandler onGestureEvent={onGestureEvent} >
         <Animated.View
