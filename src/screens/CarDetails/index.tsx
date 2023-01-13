@@ -26,10 +26,12 @@ import { useRoute } from '@react-navigation/native';
 import { useNavigate } from '../../hooks/navigate';
 import { routesNames } from '../../routes/routesEnum';
 import { CarModel } from '../../models/CarModel';
-import { StatusBar } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 import { Button } from '../../components/Button';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { RFValue } from 'react-native-responsive-fontsize';
+import theme from '../../styles/theme';
 
 interface Params {
     car: CarModel;
@@ -81,23 +83,23 @@ export function CarDetails() {
                 translucent
             />
             <Animated.View
-                style={[headerStyleAnimation, {
-                    marginTop: getStatusBarHeight() + 32,
-                }]}
+                style={[headerStyleAnimation, styles.header, { backgroundColor: theme.colors.background_secondary}]}
             >
                 <Header>
                     <BackButton onPress={goBack}/>
                 </Header>
 
                 <Animated.View style={sliderCarsStyleAnimation}>
-                    <ImageSlider imagesUrl={car.photos} />
+                    <CarImages>
+                        <ImageSlider imagesUrl={car.photos} />
+                    </CarImages>
                 </Animated.View>
             </Animated.View>
 
             <Animated.ScrollView
                 contentContainerStyle={{
-                    padding: 24,
-                    alignItems: 'center'
+                    paddingHorizontal: 24,
+                    paddingTop: getStatusBarHeight() + 160,
                 }}
                 showsVerticalScrollIndicator={false}
                 onScroll={scrollHandler}
@@ -131,11 +133,6 @@ export function CarDetails() {
 
                 <About>
                     {car.about}
-                    {car.about}
-                    {car.about}
-                    {car.about}
-                    {car.about}
-                    {car.about}
                 </About>
 
             </Animated.ScrollView>  
@@ -146,3 +143,15 @@ export function CarDetails() {
         </Container>
     );
 };
+
+const styles = StyleSheet.create({
+    header: {
+        position: 'absolute',
+        overflow: 'hidden',
+        zIndex: 1,
+    },
+    back: {
+        marginTop: 24,
+        zIndex: 2,
+    }
+})
