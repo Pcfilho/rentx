@@ -51,6 +51,8 @@ export function ImageSlider({ imagesUrl }: Props) {
             showsHorizontalScrollIndicator={false}
             horizontal
             onViewableItemsChanged={indexChanged.current}
+            pagingEnabled
+            snapToAlignment="center"
         />
         </Container>
     );

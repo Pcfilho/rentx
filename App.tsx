@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import 'react-native-gesture-handler';
 import AppLoading from 'expo-app-loading';
 import { ThemeProvider } from 'styled-components';
+import * as SplashScreen from 'expo-splash-screen';
 
 import {
   useFonts,
@@ -19,7 +20,11 @@ import theme from './src/styles/theme';
 import { Routes } from './src/routes';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
+  const [appIsReady, setAppIsReady] = useState(false);
+
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
@@ -28,12 +33,27 @@ export default function App() {
     Archivo_600SemiBold
   });
 
-  if(!fontsLoaded) {
-    return <AppLoading />;
+  useEffect(() => {
+    if (fontsLoaded) {
+      console.log("Fonts loaded");
+      setAppIsReady(true);
+    }
+  }, [fontsLoaded]);
+
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      console.log("App is ready");
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if(!appIsReady) {
+    return null;
   }
   
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <ThemeProvider theme={theme}>
         <Routes />
       </ThemeProvider>
