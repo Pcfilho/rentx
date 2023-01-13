@@ -87,7 +87,7 @@ const MyCars = () => {
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <CarWrapper>
-                <Car data={item.car} />
+                <Car data={item.car} enabled={false} />
                 <CarFooter>
                   <CarFooterTitle>Período</CarFooterTitle>
                   <CarFooterPeriod>

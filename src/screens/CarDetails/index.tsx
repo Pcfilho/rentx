@@ -86,7 +86,7 @@ export function CarDetails() {
                 style={[headerStyleAnimation, styles.header, { backgroundColor: theme.colors.background_secondary}]}
             >
                 <Header>
-                    <BackButton onPress={goBack}/>
+                    <BackButton onPress={goBack} />
                 </Header>
 
                 <Animated.View style={sliderCarsStyleAnimation}>
