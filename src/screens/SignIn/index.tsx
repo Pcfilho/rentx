@@ -3,13 +3,15 @@ import { StatusBar } from 'react-native';
 import { useTheme } from 'styled-components';
 
 import { Button } from '../../components/Button';
+import { Input } from '../../components/Input/index';
 
 import {
    Container,
    Header,
    SubTitle,
    Title,
-   Footer
+   Footer,
+   Form
  } from './styles';
 
 export function SignIn() {
@@ -31,6 +33,12 @@ export function SignIn() {
                 Faça seu login para começar{'\n'}uma experiência incrível.
             </SubTitle>
         </Header>
+        
+        <Form>
+            <Input 
+                iconName='mail'
+            />
+        </Form>
 
         <Footer>
             <Button 
@@ -48,7 +56,6 @@ export function SignIn() {
                 color={theme.colors.background_secondary}
                 light
             />
-
         </Footer>
 
     </Container>
