@@ -23,9 +23,13 @@ import {
    Footer,
    Form
  } from './styles';
+import { useNavigate } from '../../hooks/navigate';
+import { routesNames } from '../../routes/routesEnum';
+import { useNavigation } from '@react-navigation/native';
 
 export function SignIn() {
     const theme = useTheme();
+    const { goTo } = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -48,6 +52,10 @@ export function SignIn() {
             } 
         }
     };
+
+    const handleNewAccount = () => {
+        goTo(routesNames.FIRST_STEP)
+    }
 
     return (
         <KeyboardAvoidingView
@@ -102,8 +110,8 @@ export function SignIn() {
 
                         <Button 
                             title='Criar contra gratuita'
-                            onPress={() => {}}
-                            enabled={false}
+                            onPress={handleNewAccount}
+                            enabled={true}
                             loading={false}
                             color={theme.colors.background_secondary}
                             light

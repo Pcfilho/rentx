@@ -1,7 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { CarModel } from '../models/CarModel';
 
-
 export function useNavigate() {
   const navigation = useNavigation();
 

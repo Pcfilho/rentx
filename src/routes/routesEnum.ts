@@ -7,4 +7,5 @@ export const routesNames = {
   MY_CARS: 'MyCars',
   SPLASH: 'Splash',
   SIGN_IN: 'SignIn',
+  FIRST_STEP: 'FirstStep',
 };
