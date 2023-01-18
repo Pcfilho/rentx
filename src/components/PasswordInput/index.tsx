@@ -6,7 +6,8 @@ import { useTheme } from 'styled-components/native';
 import {
    Container,
    IconContainer,
-   InputText
+   InputText,
+   PasswordEyeButton
 } from './styles';
 
 interface InputProps extends TextInputProps {
@@ -15,12 +16,14 @@ interface InputProps extends TextInputProps {
    value: string,
 }
 
-export function Input({
+export function PasswordInput({
    iconName,
    value,
    ...rest
 }: InputProps) {
    const theme = useTheme();
+   const [isPasswordVisible, setIsPasswordVisible] = useState(true);
+
    const [isFocused, setIsFocused] = useState(false);
    const [isFilled, setIsFilled] = useState(false);
 
@@ -33,21 +36,36 @@ export function Input({
       setIsFilled(!!value)
    }
 
+   const handlePasswordVisibility = () => {
+      setIsPasswordVisible(oldState => !oldState)
+   }
+
    return (
-      <Container isFocused={isFocused}>
+      <Container
+         isFocused={isFocused}
+      >
          <IconContainer>
-            <Feather 
+            <Feather
                name={iconName}
                size={24}
-               color={(isFocused || isFilled) ? theme.colors.main : theme.colors.text_details}
+               color={(isFilled || isFocused) ? theme.colors.main : theme.colors.text_details} 
             />
          </IconContainer>
 
-         <InputText 
-            {...rest}
+         <InputText
             onFocus={handleIsFocused}
             onBlur={handleIsBlured}
+            secureTextEntry={isPasswordVisible} 
+            {...rest}
          />
+
+         <PasswordEyeButton onPress={handlePasswordVisibility}>
+            <Feather
+               name={isPasswordVisible ? 'eye' : 'eye-off'}
+               size={24}
+               color={theme.colors.text_details}     
+            />
+         </PasswordEyeButton>
       </Container>
    );
 };

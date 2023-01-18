@@ -1,3 +1,4 @@
+import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled, { css } from 'styled-components/native';
 
@@ -7,7 +8,7 @@ interface ContainerProps {
 
 export const Container = styled.View<ContainerProps>`
     flex-direction: row;
-    margin-bottom: 8px;
+
     ${({isFocused, theme }) => isFocused && css`
         border-bottom-width: 2px;
         border-bottom-color: ${theme.colors.main};
@@ -35,3 +36,11 @@ export const InputText = styled.TextInput`
 
     padding: 0 23px;
 `;
+
+export const PasswordEyeButton = styled(RectButton)`
+    height: 56px;
+    width: 55px;
+    justify-content: center;
+    align-items: center;
+    background-color: ${({ theme }) => theme.colors.background_secondary};
+`
