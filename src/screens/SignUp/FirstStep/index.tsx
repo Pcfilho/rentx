@@ -20,11 +20,12 @@ import {
  } from './styles';
 import { Button } from '../../../components/Button';
 import { routesNames } from '../../../routes/routesEnum';
+import { useAuth } from '../../../hooks/auth';
 
 
 export function FirstStep() {
     const theme = useTheme();
-    const { goBack, goTo, goWithParams} = useNavigate();
+    const { goBack, goWithParams} = useNavigate();
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');

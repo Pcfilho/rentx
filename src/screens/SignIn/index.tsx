@@ -28,9 +28,11 @@ import {
 import { useNavigate } from '../../hooks/navigate';
 import { routesNames } from '../../routes/routesEnum';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../hooks/auth';
 
 export function SignIn() {
     const theme = useTheme();
+    const { signIn } = useAuth();
     const { goTo } = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -47,7 +49,10 @@ export function SignIn() {
 
             await schema.validate({ email, password })
 
-            // TODO: Fazer login
+            signIn({
+                email,
+                password
+            })
         } catch (err) {
             if(err instanceof Yup.ValidationError) {
                 Alert.alert('Opa, ', err.message)
