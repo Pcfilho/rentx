@@ -1,5 +1,6 @@
-import React from 'react';
-import { Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useState } from 'react';
+import * as Yup from 'yup';
+import { Alert, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
@@ -23,10 +24,43 @@ import { routesNames } from '../../../routes/routesEnum';
 
 export function FirstStep() {
     const theme = useTheme();
-    const { goBack, goTo } = useNavigate();
+    const { goBack, goTo, goWithParams} = useNavigate();
 
-    const handleNextStep = () => {
-        goTo(routesNames.SECOND_STEP)
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [driverLicense, setDriverLicense] = useState('');
+
+    const handleNextStep = async () => {
+        try {
+            const schema = Yup.object().shape({
+                driverLicense: Yup.string()
+                .required('CNH é obrigatória'),
+
+                email: Yup.string()
+                .email('Email inválido')
+                .required('Email é obrigatório'),
+
+                name: Yup.string()
+                .required('Nome é obrigatório'),	
+
+            });
+
+            const data = {
+                name, 
+                email,
+                driverLicense
+            }
+
+            await schema.validate(data);
+
+            goWithParams(routesNames.SECOND_STEP, { user: data });
+
+        } catch (error) {
+            if (error instanceof Yup.ValidationError) {
+                return Alert.alert('Opa', error.message);
+            }
+        }
+        
     }
 
     return (
@@ -63,22 +97,24 @@ export function FirstStep() {
                         <Input 
                             iconName='user'
                             placeholder='Nome'
-                            value=''
+                            value={name}
+                            onChangeText={setName}
                         />
 
                         <Input 
                             iconName='mail'
                             placeholder='Email'
-                            value=''
-                            
+                            value={email}
+                            onChangeText={setEmail}
                             keyboardType='email-address'
                         />
 
                         <Input 
                             iconName='credit-card'
                             placeholder='CNH'
-                            value=''
-                            
+                            value={driverLicense}
+                            onChangeText={setDriverLicense}
+
                             keyboardType='numeric'
                         />
                     

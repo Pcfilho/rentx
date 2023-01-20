@@ -1,12 +1,11 @@
-import React from 'react';
-import { Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { Keyboard, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-import { useNavigate } from '../../../hooks/navigate';
+import { useNavigate, useRouteParams } from '../../../hooks/navigate';
 import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
-import { Input } from '../../../components/Input';
 
 import {
    Container,
@@ -21,9 +20,35 @@ import { Button } from '../../../components/Button';
 import { PasswordInput } from '../../../components/PasswordInput';
 
 
+interface Params {
+    user: {
+        name: string;
+        email: string;
+        driversLicense: string;
+    }
+}
+
 export function SecondStep() {
+    const [password, setPassword] = useState('');
+    const [repeatPassword, setRepeatPassword] = useState('');
+   
     const theme = useTheme();
+    const { user } = useRouteParams<Params>(); 
     const { goBack } = useNavigate();
+
+    const handleRegister = () => {
+        if(!password || !repeatPassword) {
+            return Alert.alert('Informe a sua senha e a confirmação dela.')
+        }
+
+        if(password != repeatPassword) {
+            return Alert.alert('As senhas não são iguais.')
+        }
+
+        // Enviar para a Api e cadastrar
+
+        // Ir para a tela de confirmação de cadastro
+    }
 
     return (
         <KeyboardAvoidingView
@@ -59,19 +84,22 @@ export function SecondStep() {
                         <PasswordInput 
                             iconName='lock'
                             placeholder='Senha'
-                            value=''
+                            value={password}
+                            onChangeText={setPassword}
                         />
         
                         <PasswordInput 
                             iconName='lock'
                             placeholder='Repetir senha'
-                            value=''
+                            value={repeatPassword}
+                            onChangeText={setRepeatPassword}
                         />
                     </Form>
 
                     <Button 
                         title='Cadastrar'
                         color={theme.colors.success}
+                        onPress={handleRegister}
                     />
                 </Container>
             </TouchableWithoutFeedback>
