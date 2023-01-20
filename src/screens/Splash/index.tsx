@@ -50,7 +50,7 @@ const Splash = () => {
   })
 
   const startApp = () => {
-    goTo(routesNames.HOME);
+    goTo(routesNames.SIGN_IN);
   };
 
   useEffect(() => {

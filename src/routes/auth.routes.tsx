@@ -16,14 +16,8 @@ import { Confirmation } from '../components/Confirmation';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
-export function StackRoutes() {
+export function AuthRoutes() {
     const {
-        HOME,
-        CAR_DETAILS,
-        SCHEDULING,
-        SCHEDULING_COMPLETE,
-        SCHEDULING_DETAILS,
-        MY_CARS,
         SPLASH,
         SIGN_IN,
         FIRST_STEP,
@@ -35,9 +29,8 @@ export function StackRoutes() {
         <Navigator screenOptions={{
             headerShown: false,
         }}
-            initialRouteName={HOME}
+            initialRouteName={SPLASH}
         >
-
             <Screen 
                 name={SPLASH}
                 component={Splash}
@@ -61,39 +54,6 @@ export function StackRoutes() {
             <Screen 
                 name={CONFIRMATION}
                 component={Confirmation}
-            />
-            
-            <Screen 
-                name={HOME}
-                component={Home}
-                options={{
-                    gestureEnabled: false,
-                }}
-            />
-            
-            <Screen 
-                name={CAR_DETAILS}
-                component={CarDetails}
-            />            
-            
-            <Screen 
-                name={SCHEDULING}
-                component={Scheduling}
-            />            
-        
-            <Screen 
-                name={SCHEDULING_DETAILS}
-                component={SchedulingDetails}
-            />                
-    
-            <Screen 
-                name={SCHEDULING_COMPLETE}
-                component={SchedulingComplete}
-            />
-
-            <Screen 
-                name={MY_CARS}
-                component={MyCars}
             />
         </Navigator>
     )

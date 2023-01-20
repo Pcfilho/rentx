@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar, StyleSheet, BackHandler, ActivityIndicator } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Logo from '../../assets/logo.svg';
@@ -8,7 +8,6 @@ import { useNavigate } from '../../hooks/navigate';
 import { api } from '../../services/api';
 import { CarModel } from '../../models/CarModel';
 import { routesNames } from '../../routes/routesEnum';
-import { Load } from '../../components/Load';
 
 import { LoadAnimation } from '../../components/LoadAnimation';
 
@@ -77,12 +76,6 @@ export function Home() {
       }).finally(() => setLoading(false))
   }, []);
 
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', () => {
-      return true;
-    })
-  }, []);
-
   return (
     <Container>
       <StatusBar 
@@ -113,7 +106,7 @@ export function Home() {
         }} />}
         ListEmptyComponent={<LoadAnimation />}
       />
-      <PanGestureHandler onGestureEvent={onGestureEvent} >
+      {/* <PanGestureHandler onGestureEvent={onGestureEvent} >
         <Animated.View
           style={[myCarsButtonStyle, {
             position: 'absolute',
@@ -127,7 +120,7 @@ export function Home() {
             <Ionicons name='ios-car-sport' size={32} color={theme.colors.shape}/>
           </ButtonAnimated>
         </Animated.View>
-      </PanGestureHandler>
+      </PanGestureHandler> */}
     </Container>
   );
 };

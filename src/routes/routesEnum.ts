@@ -9,5 +9,6 @@ export const routesNames = {
   SIGN_IN: 'SignIn',
   FIRST_STEP: 'FirstStep',
   SECOND_STEP: 'SecondStep',
-  CONFIRMATION: 'Confirmation'
+  CONFIRMATION: 'Confirmation',
+  PROFILE: 'Profile',
 };
