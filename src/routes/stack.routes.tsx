@@ -35,7 +35,7 @@ export function StackRoutes() {
         <Navigator screenOptions={{
             headerShown: false,
         }}
-            initialRouteName={SIGN_IN}
+            initialRouteName={HOME}
         >
 
             <Screen 

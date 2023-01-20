@@ -112,7 +112,7 @@ export function CarDetails() {
 
                     <Rent>
                         <Period>Ao dia</Period>
-                        <Price>R$ {car.rent.price}</Price>
+                        <Price>R$ {car.price}</Price>
                     </Rent>
                 </Details>
 
