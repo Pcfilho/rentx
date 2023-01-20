@@ -3,6 +3,8 @@ import { Keyboard, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
+import { Confirmation } from '../../../components/Confirmation';
+
 import { useNavigate, useRouteParams } from '../../../hooks/navigate';
 import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
@@ -18,6 +20,7 @@ import {
  } from './styles';
 import { Button } from '../../../components/Button';
 import { PasswordInput } from '../../../components/PasswordInput';
+import { routesNames } from '../../../routes/routesEnum';
 
 
 interface Params {
@@ -34,7 +37,7 @@ export function SecondStep() {
    
     const theme = useTheme();
     const { user } = useRouteParams<Params>(); 
-    const { goBack } = useNavigate();
+    const { goBack, goWithParams } = useNavigate();
 
     const handleRegister = () => {
         if(!password || !repeatPassword) {
@@ -48,6 +51,7 @@ export function SecondStep() {
         // Enviar para a Api e cadastrar
 
         // Ir para a tela de confirmação de cadastro
+        goWithParams(routesNames.CONFIRMATION, { title: 'Conta Criada!', message: 'Agroa é só fazer o login\ne aproveitar', nextScreen: routesNames.SIGN_IN })
     }
 
     return (

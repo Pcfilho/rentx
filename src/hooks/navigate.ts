@@ -1,8 +1,15 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { CarModel } from '../models/CarModel';
 
+interface Navigation {
+  navigate: (value: string, param?: Object) => void;
+  reset: (object: Object) => void;
+  canGoBack: boolean;
+  goBack: () => void;
+}
+
 export function useNavigate() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<Navigation>();
 
   const goTo = (route: string) => navigation.navigate(route);
 
@@ -19,6 +26,11 @@ export function useNavigate() {
     routes: [{ name: 'Home'}]
   });
 
+  const clearToExclusiveScreen = (name : string) => navigation.reset({
+    index: 0,
+    routes: [{ name }],
+  });
+
   const goBack = () => {
     if (navigation.canGoBack) {
       navigation.goBack();
@@ -27,7 +39,7 @@ export function useNavigate() {
     }
   };
 
-  return { goTo, goToWithCar, clearNavigation, goBack, goWithParams };
+  return { goTo, goToWithCar, clearNavigation, goBack, goWithParams, clearToExclusiveScreen };
 };
 
 export function useRouteParams<Type>() {
