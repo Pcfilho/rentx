@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { api } from '../../../services/api';
 
-import { Confirmation } from '../../../components/Confirmation';
 
 import { useNavigate, useRouteParams } from '../../../hooks/navigate';
 import { BackButton } from '../../../components/BackButton';
@@ -27,7 +27,7 @@ interface Params {
     user: {
         name: string;
         email: string;
-        driversLicense: string;
+        driverLicense: string;
     }
 }
 
@@ -39,7 +39,7 @@ export function SecondStep() {
     const { user } = useRouteParams<Params>(); 
     const { goBack, goWithParams } = useNavigate();
 
-    const handleRegister = () => {
+    const handleRegister = async () => {
         if(!password || !repeatPassword) {
             return Alert.alert('Informe a sua senha e a confirmação dela.')
         }
@@ -48,10 +48,25 @@ export function SecondStep() {
             return Alert.alert('As senhas não são iguais.')
         }
 
-        // Enviar para a Api e cadastrar
-
-        // Ir para a tela de confirmação de cadastro
-        goWithParams(routesNames.CONFIRMATION, { title: 'Conta Criada!', message: 'Agroa é só fazer o login\ne aproveitar', nextScreen: routesNames.SIGN_IN })
+        const { name, email, driverLicense } = user;
+        const postUser = {
+            name,
+            email,
+            driver_license: driverLicense,
+            password
+        }
+        await api.post('/users', postUser)
+        .then(() => {
+            goWithParams(routesNames.CONFIRMATION, {
+                title: 'Conta Criada!', 
+                message: 'Agroa é só fazer o login\ne aproveitar', 
+                nextScreen: routesNames.SIGN_IN 
+            })
+        })
+        .catch(err => {
+            Alert.alert('Opa,', 'Não foi possível cadastrar. Error: ' + err.message);
+            console.log(postUser);
+        });
     }
 
     return (
