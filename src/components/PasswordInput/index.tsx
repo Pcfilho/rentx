@@ -41,9 +41,7 @@ export function PasswordInput({
    }
 
    return (
-      <Container
-         
-      >
+      <Container>
          <IconContainer isFocused={isFocused}>
             <Feather
                name={iconName}

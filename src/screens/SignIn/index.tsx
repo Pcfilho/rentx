@@ -3,10 +3,12 @@ import {
     StatusBar,
     KeyboardAvoidingView, 
     Platform,
-    TouchableWithoutFeedback,
     Keyboard,
     Alert
 } from 'react-native';
+
+    
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import * as Yup from 'yup';
 

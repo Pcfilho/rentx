@@ -8,4 +8,5 @@ export const routesNames = {
   SPLASH: 'Splash',
   SIGN_IN: 'SignIn',
   FIRST_STEP: 'FirstStep',
+  SECOND_STEP: 'SecondStep',
 };

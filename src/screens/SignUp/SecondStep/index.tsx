@@ -18,16 +18,12 @@ import {
    FormTitle
  } from './styles';
 import { Button } from '../../../components/Button';
-import { routesNames } from '../../../routes/routesEnum';
+import { PasswordInput } from '../../../components/PasswordInput';
 
 
-export function FirstStep() {
+export function SecondStep() {
     const theme = useTheme();
-    const { goBack, goTo } = useNavigate();
-
-    const handleNextStep = () => {
-        goTo(routesNames.SECOND_STEP)
-    }
+    const { goBack } = useNavigate();
 
     return (
         <KeyboardAvoidingView
@@ -43,8 +39,8 @@ export function FirstStep() {
                             onPress={goBack}
                         />
                         <Steps>
-                            <Bullet active/>
                             <Bullet />
+                            <Bullet active/>
                         </Steps>
                     </Header>
 
@@ -58,35 +54,24 @@ export function FirstStep() {
                     
                     <Form>
                         <FormTitle>
-                            1. Dados
+                            2. Senha
                         </FormTitle>
-                        <Input 
-                            iconName='user'
-                            placeholder='Nome'
+                        <PasswordInput 
+                            iconName='lock'
+                            placeholder='Senha'
                             value=''
                         />
-
-                        <Input 
-                            iconName='mail'
-                            placeholder='Email'
+        
+                        <PasswordInput 
+                            iconName='lock'
+                            placeholder='Repetir senha'
                             value=''
-                            
-                            keyboardType='email-address'
                         />
-
-                        <Input 
-                            iconName='credit-card'
-                            placeholder='CNH'
-                            value=''
-                            
-                            keyboardType='numeric'
-                        />
-                    
                     </Form>
 
                     <Button 
-                        title='Próximo'
-                        onPress={handleNextStep}
+                        title='Cadastrar'
+                        color={theme.colors.success}
                     />
                 </Container>
             </TouchableWithoutFeedback>
