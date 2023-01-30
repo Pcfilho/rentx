@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     StatusBar,
     KeyboardAvoidingView, 
@@ -17,6 +17,7 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/Input/index';
 import { PasswordInput } from '../../components/PasswordInput';
 
+
 import {
    Container,
    Header,
@@ -27,7 +28,6 @@ import {
  } from './styles';
 import { useNavigate } from '../../hooks/navigate';
 import { routesNames } from '../../routes/routesEnum';
-import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../hooks/auth';
 
 export function SignIn() {
@@ -63,7 +63,7 @@ export function SignIn() {
     const handleNewAccount = () => {
         goTo(routesNames.FIRST_STEP)
     }
-
+    
     return (
         <KeyboardAvoidingView
             behavior='position'
