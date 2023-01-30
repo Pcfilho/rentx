@@ -81,14 +81,5 @@ public class MainActivity extends ReactActivity {
       return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
     }
 
-    @Override
-    protected ReactActivityDelegate createReactActivityDelegate() { 
-      return new ReactActivityDelegateWrapper(this, getMainComponentName()) {
-        @Override
-        protected ReactRootView createRootView() {
-          return new RNGestureHandlerEnabledRootView(MainActivity.this);
-      }
-    };
     }
-  }
   }
