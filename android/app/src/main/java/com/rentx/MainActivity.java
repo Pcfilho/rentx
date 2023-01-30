@@ -18,7 +18,7 @@ public class MainActivity extends ReactActivity {
     // This is required for expo-splash-screen.
     setTheme(R.style.AppTheme);
     super.onCreate(null);
-  }
+  };
 
   /**
    * Returns the name of the main component registered from JavaScript.
@@ -27,7 +27,7 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "main";
-  }
+  };
 
   /**
    * Returns the instance of the {@link ReactActivityDelegate}. There the RootView is created and
@@ -39,7 +39,7 @@ public class MainActivity extends ReactActivity {
     return new ReactActivityDelegateWrapper(this, BuildConfig.IS_NEW_ARCHITECTURE_ENABLED,
       new MainActivityDelegate(this, getMainComponentName())
     );
-  }
+  };
 
   /**
    * Align the back button behavior with Android S
@@ -52,19 +52,19 @@ public class MainActivity extends ReactActivity {
       if (!moveTaskToBack(false)) {
         // For non-root activities, use the default implementation to finish them.
         super.invokeDefaultOnBackPressed();
-      }
+      };
       return;
-    }
+    };
 
     // Use the default back button implementation on Android S
     // because it's doing more than {@link Activity#moveTaskToBack} in fact.
     super.invokeDefaultOnBackPressed();
-  }
+  };
 
   public static class MainActivityDelegate extends ReactActivityDelegate {
     public MainActivityDelegate(ReactActivity activity, String mainComponentName) {
       super(activity, mainComponentName);
-    }
+    };
 
     @Override
     protected ReactRootView createRootView() {
@@ -72,14 +72,14 @@ public class MainActivity extends ReactActivity {
       // If you opted-in for the New Architecture, we enable the Fabric Renderer.
       reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED);
       return reactRootView;
-    }
+    };
 
     @Override
     protected boolean isConcurrentRootEnabled() {
       // If you opted-in for the New Architecture, we enable Concurrent Root (i.e. React 18).
       // More on this on https://reactjs.org/blog/2022/03/29/react-v18.html
       return BuildConfig.IS_NEW_ARCHITECTURE_ENABLED;
-    }
+    };
 
     @Override
     protected ReactActivityDelegate createReactActivityDelegate() { 
@@ -87,6 +87,6 @@ public class MainActivity extends ReactActivity {
         @Override
         protected ReactRootView createRootView() {
           return new RNGestureHandlerEnabledRootView(MainActivity.this);
-      }
-  }
-}
+      };
+  };
+};
