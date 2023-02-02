@@ -8,11 +8,6 @@ import { Scheduling } from '../screens/Scheduling';
 import { SchedulingDetails } from '../screens/SchedulingDetails';
 import { SchedulingComplete } from '../screens/SchedulingComplete';
 import MyCars from '../screens/MyCars';
-import Splash from '../screens/Splash';
-import { SignIn } from '../screens/SignIn';
-import { FirstStep } from '../screens/SignUp/FirstStep';
-import { SecondStep } from '../screens/SignUp/SecondStep';
-import { Confirmation } from '../components/Confirmation';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -25,7 +20,6 @@ export function AppStackRoutes() {
         SCHEDULING_DETAILS,
         MY_CARS,
         SPLASH,
-        CONFIRMATION
     } = routesNames;
 
     return(

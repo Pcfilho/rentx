@@ -2,12 +2,6 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { routesNames } from './routesEnum';
 
-import { Home } from '../screens/Home';
-import { CarDetails } from '../screens/CarDetails';
-import { Scheduling } from '../screens/Scheduling';
-import { SchedulingDetails } from '../screens/SchedulingDetails';
-import { SchedulingComplete } from '../screens/SchedulingComplete';
-import MyCars from '../screens/MyCars';
 import Splash from '../screens/Splash';
 import { SignIn } from '../screens/SignIn';
 import { FirstStep } from '../screens/SignUp/FirstStep';
