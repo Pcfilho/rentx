@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { BackButton } from "../../components/BackButton";
 import { useTheme } from "styled-components";
 import { Feather } from "@expo/vector-icons";
@@ -17,7 +18,9 @@ import {
   Options,
   Option,
   OptionTitle,
+  Section,
 } from "./styles";
+import { Input } from "../../components/Input";
 
 type optionType = 'data' | 'password';
 
@@ -37,43 +40,66 @@ const Profile = () => {
   const handleSignOut = () => {};
 
   return (
-    <Container>
-      <Header>
-        <HeaderTop>
-          <BackButton color={theme.colors.shape} onPress={goBack} />
-          <HeaderTitle>Editar Perfil</HeaderTitle>
-          <LogoutButton onPress={handleSignOut}>
-            <Feather name="power" size={24} color={theme.colors.shape} />
-          </LogoutButton>
-        </HeaderTop>
+    <KeyboardAvoidingView behavior="position" enabled style={{ flex: 1 }}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <Container>
+          <Header>
+            <HeaderTop>
+              <BackButton color={theme.colors.shape} onPress={goBack} />
+              <HeaderTitle>Editar Perfil</HeaderTitle>
+              <LogoutButton onPress={handleSignOut}>
+                <Feather name="power" size={24} color={theme.colors.shape} />
+              </LogoutButton>
+            </HeaderTop>
 
-        <PhotoContainer>
-          <Photo source={{ uri: "https://github.com/Pcfilho.png" }} />
-          <PhotoButton onPress={() => {}}>
-            <Feather name="camera" size={24} color={theme.colors.shape} />
-          </PhotoButton>
-        </PhotoContainer>
-      </Header>
+            <PhotoContainer>
+              <Photo source={{ uri: "https://github.com/Pcfilho.png" }} />
+              <PhotoButton onPress={() => {}}>
+                <Feather name="camera" size={24} color={theme.colors.shape} />
+              </PhotoButton>
+            </PhotoContainer>
+          </Header>
 
-      <Content>
-        <Options>
-          <Option 
-            active={isDataEdit()}
-            onPress={() => changeOption("data")}
-          >
-            <OptionTitle active={isDataEdit()}>Dados</OptionTitle>
-          </Option>
+          <Content>
+            <Options>
+              <Option 
+                active={isDataEdit()}
+                onPress={() => changeOption("data")}
+              >
+                <OptionTitle active={isDataEdit()}>Dados</OptionTitle>
+              </Option>
 
-          <Option 
-            active={isPasswordEdit()}
-            onPress={() => changeOption("password")}
-          >
-            <OptionTitle active={isPasswordEdit()}>Trocar senha</OptionTitle>
-          </Option>
-        </Options>
+              <Option 
+                active={isPasswordEdit()}
+                onPress={() => changeOption("password")}
+              >
+                <OptionTitle active={isPasswordEdit()}>Trocar senha</OptionTitle>
+              </Option>
+            </Options>
 
-      </Content>
-    </Container>
+            <Section>
+              <Input 
+                iconName="user"
+                placeholder="nome"
+                autoCorrect={false}
+              />
+
+              <Input 
+                iconName="mail"
+                editable={false}
+              />
+
+              <Input 
+                iconName="credit-card"
+                placeholder="CNH"
+                keyboardType="numeric"
+              />
+            </Section>
+          </Content>
+        </Container>
+
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
 

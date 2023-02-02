@@ -11,8 +11,8 @@ import {
 
 interface InputProps extends TextInputProps {
    iconName: React.ComponentProps<typeof Feather>['name'],
-   placeholder: string,
-   value: string,
+   placeholder?: string,
+   value?: string,
 }
 
 export function Input({

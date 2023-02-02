@@ -14,7 +14,7 @@ export const Container = styled.View`
 
 export const Header = styled.View`
   width: 100%;
-  height: ${RFValue(230)}px;
+  height: ${RFValue(200)}px;
   background-color: ${({ theme }) => theme.colors.header};
 
   padding: 0 24px;
@@ -45,7 +45,7 @@ export const PhotoContainer = styled.View`
 
   background-color: ${({ theme }) => theme.colors.shape};
 
-  margin-top: 64px;
+  margin-top: 32px;
 `;
 
 export const Photo = styled.Image`
@@ -100,3 +100,5 @@ export const OptionTitle = styled.Text<OptionProps>`
     theme.colors.header : theme.colors.text_details
   };
 `;
+
+export const Section = styled.View``;
