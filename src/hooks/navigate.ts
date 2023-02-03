@@ -1,6 +1,8 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { CarModel } from '../models/CarModel';
+import { routesNames } from '../routes/routesEnum';
 
+type routeName = keyof typeof routesNames;
 interface Navigation {
   navigate: (value: string, param?: Object) => void;
   reset: (object: Object) => void;
@@ -11,7 +13,7 @@ interface Navigation {
 export function useNavigate() {
   const navigation = useNavigation<Navigation>();
 
-  const goTo = (route: string) => navigation.navigate(route);
+  const goTo = (route: routeName) => navigation.navigate(route);
 
   const goToWithCar = (route: string, car: CarModel) => {
     navigation.navigate(route, { car });
