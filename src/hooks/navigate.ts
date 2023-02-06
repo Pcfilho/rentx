@@ -15,11 +15,11 @@ export function useNavigate() {
 
   const goTo = (route: routeName) => navigation.navigate(route);
 
-  const goToWithCar = (route: string, car: CarModel) => {
+  const goToWithCar = (route: routeName, car: CarModel) => {
     navigation.navigate(route, { car });
   }
 
-  const goWithParams = (route: string, params: any) => {
+  const goWithParams = (route: routeName, params: any) => {
     navigation.navigate(route, {...params });
   }
 
@@ -28,7 +28,7 @@ export function useNavigate() {
     routes: [{ name: 'Home'}]
   });
 
-  const clearToExclusiveScreen = (name : string) => navigation.reset({
+  const clearToExclusiveScreen = (name : routeName) => navigation.reset({
     index: 0,
     routes: [{ name }],
   });
@@ -37,7 +37,7 @@ export function useNavigate() {
     if (navigation.canGoBack) {
       navigation.goBack();
     } else {
-      console.log("'Can't go back!!'");
+      console.log("Can't go back!!");
     }
   };
 
