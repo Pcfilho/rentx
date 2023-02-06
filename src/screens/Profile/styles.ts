@@ -8,7 +8,6 @@ interface OptionProps {
 }
 
 export const Container = styled.View`
-  flex: 1;
   background-color: ${({ theme }) => theme.colors.background_primary};
 `;
 
@@ -69,7 +68,6 @@ export const PhotoButton = styled(RectButton)`
 `;
 
 export const Content = styled.View`
-  flex: 1;
   padding: 0 24px;
   margin-top: 110px;
 `;

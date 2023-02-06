@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from "react-native";
+import {
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { BackButton } from "../../components/BackButton";
 import { useTheme } from "styled-components";
 import { Feather } from "@expo/vector-icons";
@@ -21,16 +25,20 @@ import {
   Section,
 } from "./styles";
 import { Input } from "../../components/Input";
+import { PasswordInput } from "../../components/PasswordInput";
+import { useAuth } from "../../hooks/auth";
 
-type optionType = 'data' | 'password';
+type optionType = "data" | "password";
 
 const Profile = () => {
   const theme = useTheme();
-  const { goBack } = useNavigate();
-  const [option, setOption] = useState<optionType>('data');
 
-  const isDataEdit = () => option === 'data';
-  const isPasswordEdit = () => option === 'password';
+  const { user } = useAuth();
+  const { goBack } = useNavigate();
+  const [option, setOption] = useState<optionType>("data");
+
+  const isDataEdit = () => option === "data";
+  const isPasswordEdit = () => option === "password";
 
   const changeOption = (optionSelected: optionType) => {
     if (optionSelected === option) return;
@@ -62,42 +70,50 @@ const Profile = () => {
 
           <Content>
             <Options>
-              <Option 
+              <Option
                 active={isDataEdit()}
                 onPress={() => changeOption("data")}
               >
                 <OptionTitle active={isDataEdit()}>Dados</OptionTitle>
               </Option>
 
-              <Option 
+              <Option
                 active={isPasswordEdit()}
                 onPress={() => changeOption("password")}
               >
-                <OptionTitle active={isPasswordEdit()}>Trocar senha</OptionTitle>
+                <OptionTitle active={isPasswordEdit()}>
+                  Trocar senha
+                </OptionTitle>
               </Option>
             </Options>
 
-            <Section>
-              <Input 
-                iconName="user"
-                placeholder="nome"
-                autoCorrect={false}
-              />
+            {isDataEdit() ? (
+              <Section>
+                <Input iconName="user" placeholder="nome" autoCorrect={false} defaultValue={user.name} />
 
-              <Input 
-                iconName="mail"
-                editable={false}
-              />
+                <Input iconName="mail" editable={false} defaultValue={user.email} />
 
-              <Input 
-                iconName="credit-card"
-                placeholder="CNH"
-                keyboardType="numeric"
-              />
-            </Section>
+                <Input
+                  iconName="credit-card"
+                  placeholder="CNH"
+                  keyboardType="numeric"
+                  defaultValue={user.driver_license}
+                />
+              </Section>
+            ) : (
+              <Section>
+                <PasswordInput iconName="lock" placeholder="Senha atual" />
+
+                <PasswordInput iconName="lock" placeholder="Nova senha" />
+
+                <PasswordInput
+                  iconName="lock"
+                  placeholder="Confirmar nova senha"
+                />
+              </Section>
+            )}
           </Content>
         </Container>
-
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );

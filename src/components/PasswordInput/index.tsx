@@ -13,7 +13,7 @@ import {
 interface InputProps extends TextInputProps {
    iconName: React.ComponentProps<typeof Feather>['name'],
    placeholder: string,
-   value: string,
+   value?: string,
 }
 
 export function PasswordInput({
@@ -56,6 +56,7 @@ export function PasswordInput({
             secureTextEntry={isPasswordVisible} 
             {...rest}
             isFocused={isFocused}
+            autoCorrect={false}
          />
 
          <PasswordEyeButton onPress={handlePasswordVisibility} isFocused={isFocused}>
