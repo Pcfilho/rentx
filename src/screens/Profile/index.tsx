@@ -3,6 +3,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import * as Yup from "yup";
 import * as ImagePicker from "expo-image-picker";
@@ -102,6 +103,25 @@ const Profile = () => {
     }
   };
 
+  const handleSignOut = () => {
+    Alert.alert(
+      "Tem certeza?", 
+      "Se você sair, irá precisar de internet para se conectar novamente.", 
+      [
+        {
+          text: "Cancelar",
+          onPress: () => {},
+          style: "cancel"
+        },
+        {
+          text: "Sair",
+          onPress: () => signOut(),
+          style: "destructive"
+        }
+      ]
+    )
+  };
+
   return (
     <KeyboardAvoidingView behavior="position" enabled style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -110,7 +130,7 @@ const Profile = () => {
             <HeaderTop>
               <BackButton color={theme.colors.shape} onPress={goBack} />
               <HeaderTitle>Editar Perfil</HeaderTitle>
-              <LogoutButton onPress={signOut}>
+              <LogoutButton onPress={handleSignOut}>
                 <Feather name="power" size={24} color={theme.colors.shape} />
               </LogoutButton>
             </HeaderTop>
