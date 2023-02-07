@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { RectButtonProps } from 'react-native-gesture-handler';
 
 import GasolineSvg from '../../assets/gasoline.svg';
-import { CarModel } from '../../models/CarModel';
+import { Car as CarModel } from '../../database/models/Car';
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
 import {

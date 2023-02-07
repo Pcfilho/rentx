@@ -25,7 +25,7 @@ import { Accessory } from '../../components/Accessory';
 import { useRoute } from '@react-navigation/native';
 import { useNavigate } from '../../hooks/navigate';
 import { routesNames } from '../../routes/routesEnum';
-import { CarModel } from '../../models/CarModel';
+import { Car as CarModel } from '../../database/models/Car';
 import { StatusBar, StyleSheet } from 'react-native';
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 import { Button } from '../../components/Button';

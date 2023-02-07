@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { CarModel } from '../models/CarModel';
+import { Car as CarModel } from '../database/models/Car';
 import { routesNames } from '../routes/routesEnum';
 
 type routeName = keyof typeof routesNames;

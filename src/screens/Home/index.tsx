@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Logo from '../../assets/logo.svg';
 import { Car } from '../../components/Car'
@@ -8,6 +7,11 @@ import { useNavigate } from '../../hooks/navigate';
 import { api } from '../../services/api';
 import { CarModel } from '../../models/CarModel';
 import { routesNames } from '../../routes/routesEnum';
+import { useNetInfo } from '@react-native-community/netinfo'
+import { synchronize } from '@nozbe/watermelondb/sync';
+import { database } from '../../database';
+
+import { Car as ModelCar } from '../../database/models/Car';
 
 import { LoadAnimation } from '../../components/LoadAnimation';
 
@@ -35,12 +39,28 @@ const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
 export function Home() {
   const [loading, setLoading] = useState(true);
   const { goToWithCar, goWithParams } = useNavigate();
-  const [cars, setCars] = useState<CarModel[]>([]);
+  const [cars, setCars] = useState<ModelCar[]>([]);
   const theme = useTheme()
 
+  const { isConnected } = useNetInfo();
   const positionY = useSharedValue(0);
   const positionX = useSharedValue(0);
 
+  const offlineSync = async () => {
+    await synchronize({
+      database,
+      pullChanges: async ({ lastPulledAt }) => {
+        const response = await api.get(`cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`);
+
+        const { changes, latestVersion } = response.data;
+        return { changes, timestamp: latestVersion };
+      }, 
+      pushChanges: async ({ changes }) => {
+        const user = changes.users;
+        await api.post(`/users/sync`, user);
+      },
+    });
+  }
 
   const myCarsButtonStyle = useAnimatedStyle(() => {
     return {
@@ -71,9 +91,32 @@ export function Home() {
   }
 
   useEffect(() => {
-      api.get('/cars').then(({ data }) => {
-        setCars(data);
-      }).finally(() => setLoading(false))
+    let isMounted = true;
+
+    const fetchCars = async () => {
+      try {
+        const carCollection = database.get<ModelCar>('cars');
+        const cars = await carCollection.query().fetch();
+        
+        if (isMounted) {
+          setCars(cars);
+        }  
+      } catch (error) {
+        console.log(error);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    fetchCars();
+    
+
+    return () => {
+      isMounted = false;
+    }
+  
   }, []);
 
   return (
@@ -102,7 +145,7 @@ export function Home() {
         data={cars}
         keyExtractor={({ id }) => id}
         renderItem={({ item }) => <Car data={item} onPress={() => {
-          goToWithCar(routesNames.CAR_DETAILS, item);
+          goToWithCar('CAR_DETAILS', item);
         }} />}
         ListEmptyComponent={<LoadAnimation />}
       />
