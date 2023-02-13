@@ -119,6 +119,12 @@ export function Home() {
   
   }, []);
 
+  useEffect(() => {
+    if (isConnected) {
+      offlineSync();
+    }
+  }, [isConnected])
+
   return (
     <Container>
       <StatusBar 
